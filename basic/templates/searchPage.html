@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block header %}
+
+    <div class="header-content">
+        <div class="header-content-inner">
+            <h1 >TM</h1>
+            <hr>
+            <h2>
+                <form method="post" action="/findTweets/" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type='text' id='csrftoken' name='csrftoken' value="{{ csrf_token }}" hidden='true' />
+                    <span class="icon"><i class="fa fa-search fa-fw"></i></span>
+                    <input style="color:black;" type='text' name='search' size="35"/>
+                    <input onMouseOver="this.style.color='#f05f40'" onMouseOut="this.style.color='#000'"
+                        class="btn btn-default btn-lg" type="submit" name="submit" value="Search"/>
+                </form>
+            </h2>
+
+            <!-- <p>Start Bootstrap can help you build better websites using the Bootstrap CSS framework! Just download your template and start going, no strings attached!</p>
+            <a href="#about" class="btn btn-primary btn-xl page-scroll">Find Out More</a> -->
+
+        </div>
+    </div>
+
+{% endblock %}

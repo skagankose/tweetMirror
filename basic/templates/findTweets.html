@@ -1,0 +1,250 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block head %}
+
+    <script type="text/javascript" src="{% static 'js/d3.v3.js' %}"></script>
+    <style type="text/css">
+        .hidden {
+            display: none;
+        }
+
+        rect:hover{
+            cursor: pointer;
+            fill:rgba(226, 226, 226, 0.8);
+
+        
+
+        }
+
+        input[type="text"] {
+          font-family: Verdana;
+          font-size: 13px;
+          width: 200px;
+          color:black;
+          border-radius: 5px;
+          padding: 5px;
+          border: none;
+          transition: border 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+        }
+
+    </style>
+
+{% endblock %}
+
+{% block header %}
+
+    <div class="header-content">
+        <div class="header-content-inner">
+        <h1 style="text-decoration: none;text-transform: lowercase;">{{ searchQuery }}</h1>
+        <hr>
+        <p>
+            <span style="font-size:30px;color:rgba(0,0,0,0);">ph</span>
+            <input class="hidden" type="text" id="label-1" placeholder="First Theme&hellip;">
+            <input class="hidden" type="text" id="label-2" placeholder="Second Theme&hellip;">
+            <input class="hidden" type="text" id="label-3" placeholder="Third Theme&hellip;" >
+        </p>
+        <p>
+            <div id="SVGDiv">
+            </div>
+        </p>
+
+    </div>
+    </div>
+
+{% endblock %}
+
+
+{% block script %}
+
+    <script type="text/javascript">
+
+    var circlesData = [
+        {"theme": 1, "x_axis": 100, "y_axis": 130, "radius": 95,
+            "word1": "Mention", "word2": "Ahmet", "word3": "Ahmet", "word4": "Ahmet",
+            "word5": "Ahmet", "word6": "asd", "word7": "Ahmet"},
+        {"theme": 2, "x_axis": 310, "y_axis": 130, "radius": 95,
+            "word1": "Mention", "word2": "Ahmet", "word3": "Ahmet", "word4": "Ahmet",
+            "word5": "Ahmet", "word6": "fas", "word7": "Ahmet"},
+        {"theme": 3, "x_axis": 520, "y_axis": 130, "radius": 95,
+            "word1": "Mention", "word2": "Ahmet", "word3": "Ahmet", "word4": "Ahmet",
+            "word5": "Ahmet", "word6": "Ahmet", "word7": "Ahmet"}
+    ];
+
+    var svgContainer = d3.select("#SVGDiv")
+                        .append("svg")
+                        .attr("width", 650)
+                        .attr("height", 230);
+
+    // Load the Data Here!
+
+    var rect = svgContainer.selectAll("rect")
+                       .data(circlesData)
+                       .enter()
+                       .append("rect")
+
+    var rectAttributes = rect
+       .attr("id", function(d) { return "Rect-" + d.theme })
+       .attr("x", function (d) { return d.x_axis-d.radius/3*2; })
+       .attr("y", function (d) { return d.y_axis-d.radius*4/3; })
+       .attr("height", "23px")
+       .attr("width", function(d) { return d.radius*3/2 + "px";})
+       .attr("fill", function(d) { return "rgba(240, 95, 64, 0.8)";})
+       .attr("rx", "5px")
+       .style("stroke", "rgba(226, 226, 226, 0.8)")
+       .style("stroke-width", "0.5")
+
+    var circles = svgContainer.selectAll("circle")
+                        .data(circlesData)
+                        .enter()
+                        .append("circle")
+
+    var circleAttributes = circles
+        .attr("id", function(d) { return "Circle-" + d.theme })
+        .attr("cx", function (d) { return d.x_axis; })
+        .attr("cy", function (d) { return d.y_axis; })
+        .attr("r", function (d) { return d.radius; })
+        .attr("fill", function(d) { return "rgba(226, 226, 226, 0.8)";})
+        .attr("rx", "10px")
+        .style("stroke", "rgba(240, 95, 64, 0.8)")
+        .style("stroke-width", "0.5")
+
+    var texts = svgContainer.selectAll("text")
+        .data(circlesData)
+        .enter();
+
+    texts.append("text")
+        .text(function(d) { return d.word1;})
+        .attr("fill", function (d) { return "rgba(0,0,0,1)"; })
+        .attr("font-family", "Verdana")
+        .attr({
+            x: function (d) { return d.x_axis-d.radius/3; },
+            y: function (d) { return d.y_axis-60; },
+        })
+
+    texts.append("text")
+        .text(function(d) { return d.word2;})
+        .attr("fill", function (d) { return "rgba(0,0,0,1)"; })
+        .attr("font-family", "Verdana")
+        .attr({
+            x: function (d) { return d.x_axis-d.radius/3; },
+            y: function (d) { return d.y_axis-40; },
+        })
+
+    texts.append("text")
+        .text(function(d) { return d.word3;})
+        .attr("fill", function (d) { return "rgba(0,0,0,1)"; })
+        .attr("font-family", "Verdana")
+        .attr({
+            x: function (d) { return d.x_axis-d.radius/3; },
+            y: function (d) { return d.y_axis-20; },
+        })
+
+    texts.append("text")
+        .text(function(d) { return d.word4;})
+        .attr("fill", function (d) { return "rgba(0,0,0,1)"; })
+        .attr("font-family", "Verdana")
+        .attr({
+            x: function (d) { return d.x_axis-d.radius/3; },
+            y: function (d) { return d.y_axis; },
+        })
+
+    texts.append("text")
+        .text(function(d) { return d.word5;})
+        .attr("fill", function (d) { return "rgba(0,0,0,1)"; })
+        .attr("font-family", "Verdana")
+        .attr({
+            x: function (d) { return d.x_axis-d.radius/3; },
+            y: function (d) { return d.y_axis+20; },
+        })
+
+    texts.append("text")
+        .text(function(d) { return d.word6;})
+        .attr("fill", function (d) { return "rgba(0,0,0,1)"; })
+        .attr("font-family", "Verdana")
+        .attr({
+            x: function (d) { return d.x_axis-d.radius/3; },
+            y: function (d) { return d.y_axis+40; },
+        })
+
+    texts.append("text")
+        .text(function(d) { return d.word7;})
+        .attr("fill", function (d) { return "rgba(0,0,0,1)"; })
+        .attr("font-family", "Verdana")
+        .attr({
+            x: function (d) { return d.x_axis-d.radius/3; },
+            y: function (d) { return d.y_axis+60; },
+        })
+
+    texts.append("text")
+        .text(function(d) { return "Theme " + d.theme;})
+        .attr("fill", function (d) { return "rgba(0,0,0,1)"; })
+        .attr("font-family", "Verdana")
+        .attr({
+            x: function (d) { return d.x_axis-d.radius/2; },
+            y: function (d) { return d.y_axis-d.radius-15; }
+        })
+        .attr("id", function(d) { return "ID-" + d.theme })
+
+    </script>
+
+    <script>
+    // Change the Label of the clicked Theme
+
+    function decide(label) {
+        if (d3.select(label).classed("hidden")) {
+            return false
+        } else {
+            return true
+        }
+    }
+
+    d3.select("#label-1")
+        .on("keyup", function() {
+            input_1 = document.getElementById("label-1").value
+            d3.select("#ID-1").text(input_1)
+            })
+        .on("change", function() {
+            d3.select("#label-1").classed("hidden", true);})
+
+    d3.select("#label-2")
+        .on("keyup", function() {
+            input_2 = document.getElementById("label-2").value
+            d3.select("#ID-2").text(input_2)
+            })
+        .on("change", function() {
+            d3.select("#label-2").classed("hidden", true);})
+
+    d3.select("#label-3")
+        .on("keyup", function() {
+            input_3 = document.getElementById("label-3").value
+            d3.select("#ID-3").text(input_3)
+            })
+        .on("change", function() {
+            d3.select("#label-3").classed("hidden", true);})
+
+    d3.select("#Rect-1")
+        .on("click", function() {
+            d3.select("#label-1")
+                .classed("hidden", decide("#label-1"))
+                document.getElementById("label-1").focus();});
+
+    d3.select("#Rect-2")
+        .on("click", function() {
+            d3.select("#label-2")
+            .classed("hidden", decide("#label-2"))
+            document.getElementById("label-2").focus();})
+
+    d3.select("#Rect-3")
+        .on("click", function() {
+            d3.select("#label-3")
+            .classed("hidden", decide("#label-3"))
+            document.getElementById("label-3").focus();})
+
+    </script>
+
+{% endblock %}
