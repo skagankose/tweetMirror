@@ -1,5 +1,5 @@
 from django.shortcuts import render
-import tweetDumper
+import basic.codes.tweetDumper as td
 import os
 
 
@@ -19,15 +19,15 @@ def findTweets(request):
 		searchQuery = request.POST.get('search')
 
 		# Retrieve Tweets
-		tweetDumper.get_all_tweets(str(searchQuery))
+		td.get_all_tweets(str(searchQuery))
 
 		# Run Turkish NLP
-		clean.main(str(searchQuery))
+		# clean.main(str(searchQuery))
 
 		# Run Spark
 		location = 'data/' + searchQuery + '.txt'
 		sparkPath = '/Users/k/Spark/bin/spark-submit'
-		scriptPath = 'code//simpleApp.py'
+		scriptPath = 'basic/codes/simpleApp.py'
 		os.system(sparkPath + " --master local[4] " + scriptPath + " " + searchQuery + " > " + location)
 
 		# Read Results

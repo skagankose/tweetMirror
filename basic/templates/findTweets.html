@@ -13,8 +13,6 @@
             cursor: pointer;
             fill:rgba(226, 226, 226, 0.8);
 
-        
-
         }
 
         input[type="text"] {
@@ -91,7 +89,7 @@
        .attr("id", function(d) { return "Rect-" + d.theme })
        .attr("x", function (d) { return d.x_axis-d.radius/3*2; })
        .attr("y", function (d) { return d.y_axis-d.radius*4/3; })
-       .attr("height", "23px")
+       .attr("height", "25px")
        .attr("width", function(d) { return d.radius*3/2 + "px";})
        .attr("fill", function(d) { return "rgba(240, 95, 64, 0.8)";})
        .attr("rx", "5px")
