@@ -78,14 +78,17 @@
 
     var circlesData = [
         {"theme": 1, "x_axis": 150, "y_axis": 130, "radius": 95,
-            "word1": "Mention", "word2": "Ahmet", "word3": "Ahmet", "word4": "Ahmet",
-            "word5": "Ahmet", "word6": "asd", "word7": "Ahmet"},
+            "word1": "{{results.0.0}}", "word2": "{{results.0.1}}", "word3": "{{results.0.2}}",
+            "word4": "{{results.0.3}}","word5": "{{results.0.4}}", "word6": "{{results.0.5}}",
+            "word7": "{{results.0.6}}"},
         {"theme": 2, "x_axis": 360, "y_axis": 130, "radius": 95,
-            "word1": "Mention", "word2": "Ahmet", "word3": "Ahmet", "word4": "Ahmet",
-            "word5": "Ahmet", "word6": "fas", "word7": "Ahmet"},
+            "word1": "{{results.1.0}}", "word2": "{{results.1.1}}", "word3": "{{results.1.2}}",
+            "word4": "{{results.1.3}}","word5": "{{results.1.4}}", "word6": "{{results.1.5}}",
+            "word7": "{{results.1.6}}"},
         {"theme": 3, "x_axis": 570, "y_axis": 130, "radius": 95,
-            "word1": "Mention", "word2": "Ahmet", "word3": "Ahmet", "word4": "Ahmet",
-            "word5": "Ahmet", "word6": "Ahmet", "word7": "Ahmet"}
+            "word1": "{{results.2.0}}", "word2": "{{results.2.1}}", "word3": "{{results.2.2}}",
+            "word4": "{{results.2.3}}","word5": "{{results.2.4}}", "word6": "{{results.2.5}}",
+            "word7": "{{results.2.6}}"}
     ];
 
     var svgContainer = d3.select("#SVGDiv")

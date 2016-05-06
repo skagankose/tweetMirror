@@ -31,7 +31,7 @@ def d(x,numberoftweets):
 
 def main():
 	p = sys.argv[1]
-	logFile = "data/" + p + ".txt"
+	logFile = "data/" + p + "_cleaned.txt"
 	sc = SparkContext("local", "simpleApp")
 	data = sc.textFile(logFile).cache()
 	numberoftweets = data.count()
@@ -42,11 +42,13 @@ def main():
 	wc = data.flatMap(lambda x: func(x)).groupByKey().mapValues(lambda x: len(x))
 	mat = words.leftOuterJoin(wc).map(lambda (x,y):  (x[0],(x[1], f(y[0],y[1])))).groupByKey().sortByKey().mapValues(lambda x:list(x)).mapValues(lambda x: ok(x))
 	parsedData = mat.mapValues(lambda line: Vectors.dense([float(x) for x in line.strip().split(' ')])).map(lambda (x,y): [x,y])
+
 	# Index documents with unique IDs
 	corpus = parsedData.cache()
 
 	# Cluster the documents into three topics using LDA
 	ldaModel = LDA.train(corpus, k=3)
+
 	# Output topics. Each is a distribution over words (matching word count vectors)
 	topics = ldaModel.topicsMatrix()
 	topics_dict={}
@@ -55,7 +57,7 @@ def main():
 		topics_dict[k] = {}
 		for word in range(0, ldaModel.vocabSize()):
 			topics_dict[k][str(topics[word][topic])] = word_list[word]
-	path = "data/" + p + "results.txt"
+	path = "data/" + p + "_results.txt"
 	json = open(path, 'w')
 
 	for i in topics_dict.keys():
@@ -68,19 +70,6 @@ def main():
 			json.write(ww)
 		json.write("\n")
 	json.close()
-
-	# Start Here
-	#logData = logData.map(lambda x: (x,"Spark has been used!"))
-	#result = logData.collect()
-
-	# No need
-	#for element in result:
-
-		# Check whether all chracters are ASCII
-	#    try:
-	#        print element[0] + " - " + element[1]
-	#    except:
-	#        pass
 
 if __name__ == "__main__":
 	main()
