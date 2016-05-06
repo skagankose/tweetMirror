@@ -19,22 +19,39 @@ def findTweets(request):
 		searchQuery = request.POST.get('search')
 
 		location = 'data/' + searchQuery + '_results.txt'
+		results = [[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]
 
 		try:
 
-			# Read Results
-			results = list()
+			topic = 0
+			word = 0
 			with open(location, 'r') as F:
+
 				for line in F:
-					results += [line.split()]
+
+					if word < 7:
+						# print topic, word
+						results[topic][word] = line.strip("\n")
+						word += 1
+					else:
+						word = 0
+						topic += 1
 
 		except:
 
-			# Retrieve Tweets
-			td.get_all_tweets(str(searchQuery))
+			try:
+					ts = 'data/' + searchQuery + '_tweets.csv'
+					with open(ts, 'r') as F:
+						pass
+
+			except:
+
+					# Retrieve Tweets
+					td.get_all_tweets(str(searchQuery))
 
 			# Run Turkish NLP
-			# clean.main(str(searchQuery))
+			nlpPath = 'basic/codes/NLPTurkish.py'
+			os.system("python3 " +  " " + nlpPath + " " + searchQuery)
 
 			# Run Spark
 			sparkPath = '/Users/k/Spark/bin/spark-submit'
@@ -42,18 +59,19 @@ def findTweets(request):
 			os.system(sparkPath + " --master local[4] " + scriptPath + " " + searchQuery)
 
 			# Read Results
-			results = list()
+			topic = 0
+			word = 0
 			with open(location, 'r') as F:
-				for line in F:
-					results += [line.split()]
 
-		# Get Words
-		# t00= results[0][0];t01= results[0][1];t02= results[0][2];t03= results[0][3];t04= results[0][4];
-		# t05= results[0][5];t06= results[0][6];
-		# t00= results[0][0];t01= results[0][1];t02= results[0][2];t03= results[0][3];t04= results[0][4];
-		# t05= results[0][5];t06= results[0][6];
-		# t00= results[0][0];t01= results[0][1];t02= results[0][2];t03= results[0][3];t04= results[0][4];
-		# t05= results[0][5];t06= results[0][6];
+				for line in F:
+
+					if word < 7:
+						# print topic, word
+						results[topic][word] = line.strip("\n")
+						word += 1
+					else:
+						word = 0
+						topic += 1
 
 
 		context = {"searchQuery":searchQuery, "results": results}

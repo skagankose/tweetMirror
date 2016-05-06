@@ -6,11 +6,12 @@ stopwords=set(["acaba","altmış","altı","ama","bana",
 "milyar","milyon","mu","mü","nasıl","ne","neden","nerde","nerede","nereye","niye","niçin","on","ona","ondan","onlar","onlardan","onları","onların",
 "onu","otuz","sanki","sekiz","seksen","sen","senden","seni","senin","siz","sizden","sizi","sizin","trilyon","tüm","ve","veya","ya","yani","yedi",
 "yetmiş","yirmi","yüz","çok","çünkü","üç","şey","şeyden","şeyi","şeyler","şu","şuna","şunda","şundan","şunu","in","ın","un","ün","var"])
+
 import pipeline_caller
 import re
+import sys
 caller = pipeline_caller.PipelineCaller()
 NLPToken = "ym0ZWsgRYCcDmg3B6M9hO0ViWxF4SImn"
-
 
 def clean(searchQuery):
     input_file_name = str(searchQuery)
@@ -39,7 +40,7 @@ def clean(searchQuery):
             o.write(line+"\n")
     f.close()
     o.close()
-    return rString
+    return(0)
 
 def clearSomething(line):
 
@@ -56,6 +57,7 @@ def clearStopwords(line):
             rStr += element + " "
     return rStr
 
-
 if __name__ == "__main__":
-    clean()
+
+    sq = sys.argv[1]
+    clean(sq)

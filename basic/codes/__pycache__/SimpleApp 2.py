@@ -3,7 +3,6 @@ import sys
 from pyspark.mllib.clustering import LDA, LDAModel
 from pyspark.mllib.linalg import Vectors
 from pyspark.sql import Row
-import os
 #!/usr/bin/env python
 #-*-coding:utf-8-*-
 
@@ -52,9 +51,6 @@ def main():
 
 	# Output topics. Each is a distribution over words (matching word count vectors)
 	topics = ldaModel.topicsMatrix()
-
-	print(topics)
-
 	topics_dict={}
 	for topic in range(3):
 		k = "Topic "+ str(topic)
@@ -62,9 +58,11 @@ def main():
 		for word in range(0, ldaModel.vocabSize()):
 			topics_dict[k][str(topics[word][topic])] = word_list[word]
 
-	path = "data/" + p + "_results.txt"
-	json = open(path, 'wb')
-	json.close()
+	# path = "data/" + p + "_results.txt"
+	# json = open(path, 'wb')
+
+	# from chardet import detect
+	# encoding = lambda x: detect(x)['encoding']
 
 	for i in topics_dict.keys():
 		counter=0
@@ -72,14 +70,15 @@ def main():
 		for l in z:
 			if counter == 7: break
 			line = topics_dict[i][l] + " "
+			counter+=1
+			string_for_output = line.encode('utf8', 'replace')
+			print(line)
+			# n_line=unicode(line,encoding(line),errors='ignore')
+			# json.write(n_line.encode('utf8'))
+			# print(n_line.encode('utf8'))
 
-			try:
-				string_for_output = line.encode('utf8', 'replace')
-				os.system("python3 basic/codes/p3p.py " +  string_for_output + "  >> " + path)
-				counter += 1
-			except: pass
-
-		os.system("python3 basic/codes/p3p.py " +  "delmch" + "  >> " + path)
+	# 	json.write("\n")
+	# json.close()
 
 if __name__ == "__main__":
 	main()
