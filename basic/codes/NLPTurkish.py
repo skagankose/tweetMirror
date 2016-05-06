@@ -12,11 +12,6 @@ caller = pipeline_caller.PipelineCaller()
 NLPToken = "ym0ZWsgRYCcDmg3B6M9hO0ViWxF4SImn"
 
 
-yazi = "merhaba arkadaslar nasılsnız*ahmet cok sıkıldım"
-
-#yazi = caller.call('pipelineNoisy', yazi, NLPToken)
-
-
 def clean(searchQuery):
     input_file_name = str(searchQuery)
     f = open('data/%s_tweets.csv' % input_file_name, 'r')
