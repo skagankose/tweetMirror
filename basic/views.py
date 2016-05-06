@@ -26,9 +26,9 @@ def findTweets(request):
 
 		# Run Spark
 		location = 'data/' + searchQuery + '.txt'
-		sparkPath = '/Users/k/Spark/bin/spark-submit'
+		sparkPath = '/Users/hacertilbec/Desktop/MacOrLinux/spark-1.6.0/bin/spark-submit'
 		scriptPath = 'basic/codes/simpleApp.py'
-		os.system(sparkPath + " --master local[4] " + scriptPath + " " + searchQuery + " > " + location)
+		os.system(sparkPath + " --master local[4] " + scriptPath + " " + searchQuery)
 
 		# Read Results
 		# In this case, just Tweets
