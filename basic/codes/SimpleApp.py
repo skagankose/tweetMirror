@@ -53,7 +53,7 @@ def main():
 	# Output topics. Each is a distribution over words (matching word count vectors)
 	topics = ldaModel.topicsMatrix()
 
-	print(topics)
+	# print(topics)
 
 	topics_dict={}
 	for topic in range(3):
