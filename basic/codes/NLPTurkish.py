@@ -5,7 +5,7 @@ stopwords=set(["acaba","altmış","altı","ama","bana",
 "dört","elli","en","gibi","hem","hep","hepsi","her","hiç","iki","ile","ise","için","katrilyon","kez","ki","kim","kimden","kime","kimi","kırk",
 "milyar","milyon","mu","mü","nasıl","ne","neden","nerde","nerede","nereye","niye","niçin","on","ona","ondan","onlar","onlardan","onları","onların",
 "onu","otuz","sanki","sekiz","seksen","sen","senden","seni","senin","siz","sizden","sizi","sizin","trilyon","tüm","ve","veya","ya","yani","yedi",
-"yetmiş","yirmi","yüz","çok","çünkü","üç","şey","şeyden","şeyi","şeyler","şu","şuna","şunda","şundan","şunu","in","ın","un","ün"])
+"yetmiş","yirmi","yüz","çok","çünkü","üç","şey","şeyden","şeyi","şeyler","şu","şuna","şunda","şundan","şunu","in","ın","un","ün","var"])
 import pipeline_caller
 import re
 caller = pipeline_caller.PipelineCaller()
@@ -45,7 +45,7 @@ def clearSomething(line):
 
     rStr = str()
     for element in line.split():
-        if not element.startswith('http') and "rt" not in element:
+        if not element.startswith('http') and not element.startswith('@') and not element.startswith('#') and "rt" not in element:
             rStr += element + " "
     return rStr
 
@@ -55,6 +55,7 @@ def clearStopwords(line):
         if element not in stopwords :
             rStr += element + " "
     return rStr
+
 
 if __name__ == "__main__":
     clean()
