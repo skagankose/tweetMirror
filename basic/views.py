@@ -8,11 +8,6 @@ def searchPage(request):
 	context = {}
 	return render(request, 'searchPage.html', context)
 
-def themes(request):
-
-	context = {}
-	return render(request, 'themes.html', context)
-
 def findTweets(request):
 
 	if request.method == 'POST':
