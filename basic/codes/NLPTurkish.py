@@ -20,6 +20,7 @@ def clean(searchQuery):
     o =open('data/%s_cleaned.txt' % output_file_name, 'w')
     resultString = str()
     rString=str()
+    print("NLP cleaning started.")
     for line in f:
         line = line.lower()
         line = line.replace("i̇","i")
@@ -27,7 +28,10 @@ def clean(searchQuery):
         line = " ".join(re.split('\W+',line))
         if len(line) != 0:
             resultString += line + "*"
+    print("Entered NLP...")
     resultString = caller.call('pipelineNoisy', resultString, NLPToken)
+    print("NLP completed.")
+    print("Couple more NLP cleaning...")
     for i in resultString.split("\n"):
         k = i.split("\t")
         if k[3]=="Verb" or k[2]=="_":

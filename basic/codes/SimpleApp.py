@@ -75,8 +75,9 @@ def main():
 
 			try:
 				string_for_output = line.encode('utf8', 'replace')
-				os.system("python3 basic/codes/p3p.py " +  string_for_output + "  >> " + path)
-				counter += 1
+				if string_for_output != " ":
+					os.system("python3 basic/codes/p3p.py " +  string_for_output + "  >> " + path)
+					counter += 1
 			except: pass
 
 		os.system("python3 basic/codes/p3p.py " +  "delmch" + "  >> " + path)
