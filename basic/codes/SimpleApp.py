@@ -26,9 +26,9 @@ def main():
 	model = Vector.fit(docDF)
 	result = model.transform(docDF)
 	corpus_size = result.count()
-	
+
 	corpus = result.select("idd", "vectors").map(lambda (x,y): [x,y]).cache()
-	
+
 	# Cluster the documents into three topics using LDA
 	ldaModel = LDA.train(corpus, k=3,maxIterations=100,optimizer='online')
 	topics = ldaModel.topicsMatrix()
@@ -43,7 +43,7 @@ def main():
 
 	for topic in topics_final:
 		for term in topic:
-			line = term + " "
+			line = term[0] + " "
 
 			try:
 				string_for_output = line.encode('utf8', 'replace')

@@ -14,7 +14,7 @@ def findTweets(request):
 		searchQuery = request.POST.get('search')
 
 		location = 'data/' + searchQuery + '_results.txt'
-		results = [[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]
+		results = [[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0]]
 
 		try:
 
@@ -24,7 +24,7 @@ def findTweets(request):
 
 				for line in F:
 
-					if word < 7:
+					if word < 9:
 						# print topic, word
 						results[topic][word] = line.strip("\n")
 						word += 1
@@ -44,9 +44,17 @@ def findTweets(request):
 					# Retrieve Tweets
 					td.get_all_tweets(str(searchQuery))
 
-			# Run Turkish NLP
-			nlpPath = 'basic/codes/NLPTurkish.py'
-			os.system("python3 " +  " " + nlpPath + " " + searchQuery)
+					try:
+
+						location = 'data/' + searchQuery + '_cleaned.txt'
+						with open(location, 'r') as F:
+							pass
+
+					except:
+
+						# Run Turkish NLP
+						nlpPath = 'basic/codes/NLPTurkish.py'
+						os.system("python3 " +  " " + nlpPath + " " + searchQuery)
 
 			# Run Spark
 			sparkPath = '/Users/k/Spark/bin/spark-submit'
@@ -60,7 +68,7 @@ def findTweets(request):
 
 				for line in F:
 
-					if word < 7:
+					if word < 9:
 						# print topic, word
 						results[topic][word] = line.strip("\n")
 						word += 1

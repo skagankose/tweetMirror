@@ -33,11 +33,15 @@ def clean(searchQuery):
     print("NLP completed.")
     print("Couple more NLP cleaning...")
     for i in resultString.split("\n"):
+
+
         k = i.split("\t")
-        if k[3]=="Verb" or k[2]=="_":
-            pass
-        else:
-            rString+=k[2]+" "
+        try:
+            if k[3]=="Verb" or k[2]=="_":
+                pass
+            else:
+                rString+=k[2]+" "
+        except: pass
     for line in rString.split("*"):
         line = clearStopwords(line)
         if len(line)!=0:
