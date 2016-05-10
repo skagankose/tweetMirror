@@ -40,7 +40,7 @@
 
     <div class="header-content">
         <div class="header-content-inner">
-        <h1 style="text-decoration: none;text-transform: lowercase;">{{ searchQuery }}</h1>
+        <h1 style="text-decoration: none;text-transform: lowercase;">{{ tmpModel.username }}</h1>
         <hr>
         <p>
             <span style="font-size:30px;color:rgba(0,0,0,0);">ph</span>
@@ -80,17 +80,17 @@
 
     var circlesData = [
         {"theme": 1, "x_axis": 150, "y_axis": 130, "radius": 95,
-            "word1": "{{results.0.0}}", "word2": "{{results.0.1}}", "word3": "{{results.0.2}}",
-            "word4": "{{results.0.3}}","word5": "{{results.0.4}}", "word6": "{{results.0.5}}",
-            "word7": "{{results.0.6}}"},
+            "word1": "{{tmpModel.t1w1}}", "word2": "{{tmpModel.t1w2}}", "word3": "{{tmpModel.t1w3}}",
+            "word4": "{{tmpModel.t1w4}}","word5": "{{tmpModel.t1w5}}", "word6": "{{tmpModel.t1w6}}",
+            "word7": "{{tmpModel.t1w7}}"},
         {"theme": 2, "x_axis": 360, "y_axis": 130, "radius": 95,
-            "word1": "{{results.1.0}}", "word2": "{{results.1.1}}", "word3": "{{results.1.2}}",
-            "word4": "{{results.1.3}}","word5": "{{results.1.4}}", "word6": "{{results.1.5}}",
-            "word7": "{{results.1.6}}"},
+            "word1": "{{tmpModel.t2w1}}", "word2": "{{tmpModel.t2w2}}", "word3": "{{tmpModel.t2w3}}",
+            "word4": "{{tmpModel.t2w4}}","word5": "{{tmpModel.t2w5}}", "word6": "{{tmpModel.t2w6}}",
+            "word7": "{{tmpModel.t2w7}}"},
         {"theme": 3, "x_axis": 570, "y_axis": 130, "radius": 95,
-            "word1": "{{results.2.0}}", "word2": "{{results.2.1}}", "word3": "{{results.2.2}}",
-            "word4": "{{results.2.3}}","word5": "{{results.2.4}}", "word6": "{{results.2.5}}",
-            "word7": "{{results.2.6}}"}
+            "word1": "{{tmpModel.t3w1}}", "word2": "{{tmpModel.t3w2}}", "word3": "{{tmpModel.t3w3}}",
+            "word4": "{{tmpModel.t3w4}}","word5": "{{tmpModel.t3w5}}", "word6": "{{tmpModel.t3w6}}",
+            "word7": "{{tmpModel.t3w7}}"}
     ];
 
     var svgContainer = d3.select("#SVGDiv")

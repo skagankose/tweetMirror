@@ -7,5 +7,4 @@ urlpatterns = [
     url(r'^searchPage/$', views.searchPage, name='searchPage'),
     url(r'^findTweets/$', views.findTweets, name='findTweets'),
 
-
 ]

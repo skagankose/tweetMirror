@@ -1,11 +1,12 @@
 
-stopwords=set(["acaba","altmış","altı","ama","bana",
-"bazı","belki","ben","benden","beni","benim","bir","biri","birkaç","birkez","birşey","birşeyi","biz","bizden","bizi","bizim","bu",
-"buna","bunda","bundan","bunu","bunun","da","daha","dahi","de","defa","diye","doksan","dokuz",
-"dört","elli","en","gibi","hem","hep","hepsi","her","hiç","iki","ile","ise","için","katrilyon","kez","ki","kim","kimden","kime","kimi","kırk",
+stopwords=set(["mi","mı","mu","mü",
+"acaba","altmış","altı","ama","bana","bazı","belki","ben","benden","beni","benim","bir","biri","birkaç",
+"birkez","birşey","birşeyi","biz","bizden","bizi","bizim","bu","buna","bunda","bundan","bunu","bunun","da",
+"daha","dahi","de","defa","diye","doksan","dokuz","dört","elli","en","gibi","hem","hep","hepsi","her","hiç","iki","ile","ise","için","katrilyon","kez","ki","kim","kimden","kime","kimi","kırk",
 "milyar","milyon","mu","mü","nasıl","ne","neden","nerde","nerede","nereye","niye","niçin","on","ona","ondan","onlar","onlardan","onları","onların",
 "onu","otuz","sanki","sekiz","seksen","sen","senden","seni","senin","siz","sizden","sizi","sizin","trilyon","tüm","ve","veya","ya","yani","yedi",
-"yetmiş","yirmi","yüz","çok","çünkü","üç","şey","şeyden","şeyi","şeyler","şu","şuna","şunda","şundan","şunu","in","ın","un","ün","var"])
+"yetmiş","yirmi","yüz","çok","çünkü","üç","şey","şeyden","şeyi","şeyler","şu","şuna","şunda","şundan","şunu","in","ın","un","ün","var",
+"yok"])
 
 import pipeline_caller
 import re
@@ -24,9 +25,10 @@ def clean(searchQuery):
     for line in f:
         line = line.lower()
         line = line.replace("i̇","i")
-        line = clearSomething(line)
+        line = clearTweetTag(line)
+        line = clearStopwords(line)
         line = " ".join(re.split('\W+',line))
-        if len(line) != 0:
+        if len(line) != 0 and line != '':
             resultString += line + "*"
     print("Entered NLP...")
     resultString = caller.call('pipelineNoisy', resultString, NLPToken)
@@ -43,6 +45,8 @@ def clean(searchQuery):
                 rString+=k[2]+" "
         except: pass
     for line in rString.split("*"):
+        line = line.lower()
+        line = line.replace("i̇","i")
         line = clearStopwords(line)
         if len(line)!=0:
             o.write(line+"\n")
@@ -50,7 +54,7 @@ def clean(searchQuery):
     o.close()
     return(0)
 
-def clearSomething(line):
+def clearTweetTag(line):
 
     rStr = str()
     for element in line.split():
@@ -61,7 +65,7 @@ def clearSomething(line):
 def clearStopwords(line):
     rStr = str()
     for element in line.split():
-        if element not in stopwords :
+        if element not in stopwords and element != " " and len(element) > 1:
             rStr += element + " "
     return rStr
 

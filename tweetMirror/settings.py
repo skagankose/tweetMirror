@@ -75,10 +75,16 @@ WSGI_APPLICATION = 'tweetMirror.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'tweetmirror_db',
+        'USER': 'myusername',
+        'PASSWORD': 'mypassword',
+        'HOST': '',
+        'PORT': '',
+        'ATOMIC_REQUESTS': True
     }
 }
 

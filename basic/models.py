@@ -1,3 +1,25 @@
 from django.db import models
 
-# Create your models here.
+class Results(models.Model):
+    username = models.CharField(max_length=200, default="unknownUser")
+    t1w1 = models.CharField(max_length=200, default="t1w1")
+    t1w2 = models.CharField(max_length=200, default="t1w2")
+    t1w3 = models.CharField(max_length=200, default="t1w3")
+    t1w4 = models.CharField(max_length=200, default="t1w4")
+    t1w5 = models.CharField(max_length=200, default="t1w5")
+    t1w6 = models.CharField(max_length=200, default="t1w6")
+    t1w7 = models.CharField(max_length=200, default="t1w7")
+    t2w1 = models.CharField(max_length=200, default="t2w1")
+    t2w2 = models.CharField(max_length=200, default="t2w2")
+    t2w3 = models.CharField(max_length=200, default="t2w3")
+    t2w4 = models.CharField(max_length=200, default="t2w4")
+    t2w5 = models.CharField(max_length=200, default="t2w5")
+    t2w6 = models.CharField(max_length=200, default="t2w6")
+    t2w7 = models.CharField(max_length=200, default="t2w7")
+    t3w1 = models.CharField(max_length=200, default="t2w1")
+    t3w2 = models.CharField(max_length=200, default="t2w2")
+    t3w3 = models.CharField(max_length=200, default="t2w3")
+    t3w4 = models.CharField(max_length=200, default="t2w4")
+    t3w5 = models.CharField(max_length=200, default="t2w5")
+    t3w6 = models.CharField(max_length=200, default="t2w6")
+    t3w7 = models.CharField(max_length=200, default="t2w7")
