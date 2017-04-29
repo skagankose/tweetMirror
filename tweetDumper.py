@@ -5,10 +5,10 @@ import tweepy
 import csv
 
 #Twitter API credentials
-consumer_key = "IivwDls7fYU6WTdzatJGxJ4Re"
-consumer_secret = "xwsedLJdvvgT3EaMQwPA24LtYb4067EE2avf3ogCxyfRGJ0kCw"
-access_key = "4590451846-yWybwxLHOGCpCwEmh5XgqcWgIbi505UvjJ1nP0y"
-access_secret = "EWq727mJBVid759fqKJWVOacHYqYX4he1AVOeGV7cwkj6"
+consumer_key = ""
+consumer_secret = ""
+access_key = ""
+access_secret = ""
 
 
 def get_all_tweets(screen_name):
